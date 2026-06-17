@@ -214,7 +214,7 @@ Maintain high-value benefits such as Health Insurance, review the Wellness Progr
 
 ### Benefits Utilisation and Satisfaction
 
-![Benefits Utilisation and Satisfaction](Images/benefits_utilisation_satisfaction_analysis.png)
+![Benefits Utilisation and Satisfaction](Images/benefit_utilisation_satisfaction_analysis.png)
 
 ### HR Action Plan
 
