@@ -200,27 +200,25 @@ Maintain high-value benefits such as Health Insurance, review the Wellness Progr
 
 ## Dashboard Preview
 
-Add dashboard screenshots to the `/images` folder and embed them here.
-
 ### Executive Overview
 
-![Executive Overview](images/executive_overview.png)
+![Executive Overview](Images/executive_overview.png)
 
 ### Workforce Demographics
 
-![Workforce Demographics](images/workforce_demographics.png)
+![Workforce Demographics](Images/workforce_demographics.png)
 
 ### Performance and Training Analysis
 
-![Performance and Training Analysis](images/performance_training_analysis.png)
+![Performance and Training Analysis](Images/performance_training_analysis.png)
 
 ### Benefits Utilisation and Satisfaction
 
-![Benefits Utilisation and Satisfaction](images/benefits_utilisation_satisfaction_analysis.png)
+![Benefits Utilisation and Satisfaction](Images/benefits_utilisation_satisfaction_analysis.png)
 
 ### HR Action Plan
 
-![HR Action Plan](images/hr_action_plan.png)
+![HR Action Plan](Images/hr_action_plan.png)
 
 ---
 
