@@ -49,8 +49,6 @@ The main objectives of this project were to:
 | **Excel / CSV** | Structured source data storage |
 | **GitHub** | Project documentation and version sharing |
 
-> SQL was not used in this version of the project. The analysis was completed using Power BI, Power Query, and DAX. If SQL is added later, it should be included in a separate `/sql` folder with documented queries.
-
 ---
 
 ## Data Sources
@@ -116,7 +114,7 @@ Converts dashboard insights into practical HR recommendations, prioritising acti
 | Training Gap Rate | 51.2% |
 | Average Performance Rating | 3.2 |
 | Average Engagement Score | 3.0 |
-| Average Benefit Satisfaction | 3.07 |
+| Average Benefit Satisfaction | 3.1 |
 | High Performer Rate | 45.1% |
 | Low Performer Rate | 36.1% |
 | Development Risk Employees | 84 |
@@ -199,172 +197,6 @@ Maintain high-value benefits such as Health Insurance, review the Wellness Progr
 
 ---
 
-## Data Quality, Assumptions and Interpretation Notes
-
-| Area | Note | Mitigation |
-|---|---|---|
-| Source data structure | Some fields may represent simplified HR records rather than fully integrated HRIS data. | Treat findings as directional and validate against operational HR systems before final policy decisions. |
-| Benefit usage recording | Paid Time-Off shows very low usage, which may indicate under-recording or separate tracking. | Confirm how each benefit type is captured before reducing or expanding provision. |
-| Development-risk definition | Risk classification depends on selected thresholds for performance, engagement, and training completion. | Review thresholds with HR leaders and adjust based on organisational standards. |
-| Department size effects | Departments with larger employee populations may naturally show higher counts of development-risk employees. | Use Development Risk Rate by Department alongside the existing count view to compare departments proportionally. |
-| Cross-sectional view | The dashboard currently shows a point-in-time snapshot rather than a trend over time. | Introduce monthly snapshots to measure change and intervention impact. |
-
----
-
-## Recommended Dashboard Enhancements
-
-Future improvements could include:
-
-- Add **Development Risk Rate by Department** to compare departments fairly.
-- Add time-series tracking for training completion, engagement, and performance movement.
-- Add benefit cost fields to calculate cost per usage and satisfaction return on investment.
-- Add employee turnover or attrition data to investigate whether engagement and development-risk indicators predict retention issues.
-- Create drill-through pages for department managers with controlled access to employee-level details.
-
----
-
-## Selected DAX Measures
-
-The README includes selected DAX measures to show the analytical logic behind the dashboard. A full project can also include a separate `DAX_Measures.md` file for all measures.
-
-```DAX
-Total Employees =
-DISTINCTCOUNT(Employee_Demographics_Data[Employee ID])
-```
-
-```DAX
-Average Performance Rating =
-AVERAGE(Employee_Performance_Data[Quarterly Performance Rating])
-```
-
-```DAX
-Average Engagement Score =
-AVERAGE(Employee_Performance_Data[Employee Engagement Score])
-```
-
-```DAX
-Training Completed Employees =
-CALCULATE(
-    DISTINCTCOUNT(Employee_Performance_Data[Employee ID]),
-    Employee_Performance_Data[Training Completed] = "Yes"
-)
-```
-
-```DAX
-Training Completion Rate =
-DIVIDE(
-    [Training Completed Employees],
-    DISTINCTCOUNT(Employee_Performance_Data[Employee ID])
-)
-```
-
-```DAX
-Training Gap Employees =
-CALCULATE(
-    DISTINCTCOUNT(Employee_Performance_Data[Employee ID]),
-    Employee_Performance_Data[Training Completed] = "No"
-)
-```
-
-```DAX
-Training Gap Rate =
-DIVIDE(
-    [Training Gap Employees],
-    DISTINCTCOUNT(Employee_Performance_Data[Employee ID])
-)
-```
-
-```DAX
-High Performers =
-CALCULATE(
-    DISTINCTCOUNT(Employee_Performance_Data[Employee ID]),
-    Employee_Performance_Data[Quarterly Performance Rating] >= 4
-)
-```
-
-```DAX
-Low Performers =
-CALCULATE(
-    DISTINCTCOUNT(Employee_Performance_Data[Employee ID]),
-    Employee_Performance_Data[Quarterly Performance Rating] <= 2
-)
-```
-
-```DAX
-Development Risk Employees =
-CALCULATE(
-    DISTINCTCOUNT(Employee_Performance_Data[Employee ID]),
-    FILTER(
-        Employee_Performance_Data,
-        Employee_Performance_Data[Training Completed] = "No"
-            &&
-        (
-            Employee_Performance_Data[Quarterly Performance Rating] <= 2
-            || Employee_Performance_Data[Employee Engagement Score] <= 2
-        )
-    )
-)
-```
-
-```DAX
-Development Risk Rate =
-DIVIDE(
-    [Development Risk Employees],
-    DISTINCTCOUNT(Employee_Performance_Data[Employee ID])
-)
-```
-
-```DAX
-Total Benefit Usage =
-SUM(Employee_Benefits_Data[Utilization Frequency])
-```
-
-```DAX
-Average Benefit Satisfaction =
-AVERAGE(Employee_Benefits_Data[Employee Satisfaction with Benefit])
-```
-
-```DAX
-Benefit Participation Rate =
-DIVIDE(
-    DISTINCTCOUNT(Employee_Benefits_Data[Employee ID]),
-    [Total Employees]
-)
-```
-
----
-
-## Suggested Repository Structure
-
-```text
-tech-innovators-hr-analytics/
-│
-├── README.md
-│
-├── dashboard/
-│   └── Tech_Innovators_HR_Analytics_Dashboard.pbix
-│
-├── data/
-│   ├── Employee_Performance_Data.csv
-│   ├── Employee_Demographics_Data.csv
-│   └── Employee_Benefits_Data.csv
-│
-├── documentation/
-│   ├── Tech_Innovators_HR_Analytics_Business_Report.docx
-│   ├── Tech_Innovators_HR_Analytics_Detailed_Business_Report.docx
-│   └── Tech_Innovators_HR_Analytics_Business_Presentation.pptx
-│
-├── images/
-│   ├── executive_overview.png
-│   ├── workforce_demographics.png
-│   ├── performance_training_analysis.png
-│   ├── benefits_utilisation_satisfaction.png
-│   └── hr_action_plan.png
-│
-└── DAX_Measures.md
-```
-
----
 
 ## Dashboard Preview
 
@@ -384,7 +216,7 @@ Add dashboard screenshots to the `/images` folder and embed them here.
 
 ### Benefits Utilisation and Satisfaction
 
-![Benefits Utilisation and Satisfaction](images/benefits_utilisation_satisfaction.png)
+![Benefits Utilisation and Satisfaction](images/benefits_utilisation_satisfaction_analysis.png)
 
 ### HR Action Plan
 
